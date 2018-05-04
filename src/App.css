@@ -1,0 +1,28 @@
+.App {
+  background: #222;
+  color: white;
+  text-align: center;
+}
+
+.placeholder {
+  height: 100vh;
+}
+
+form {
+  border: 2px solid #eee;
+  border-radius: 5px;
+  display: inline-flex;
+  margin: 2vh 0;
+}
+form input, form button {
+  border: none;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+form input {
+
+}
+form button {
+
+}
+

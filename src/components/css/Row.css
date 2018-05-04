@@ -1,0 +1,11 @@
+.row {
+  background: #222;
+  border: 1px solid black;
+  padding: 2vh 0;
+  eight: 240px;
+}
+.row-title {
+	margin: 2vh 5vw;
+	text-align: left;
+	width: 100%;
+}
