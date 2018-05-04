@@ -26,3 +26,10 @@ form button {
 
 }
 
+h1 {
+  border-bottom: 2px solid tomato;
+  font-family: 'pangolin';
+  font-size: 50px;
+  margin: 20vh 30%;
+}
+

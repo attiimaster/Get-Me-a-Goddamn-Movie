@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import './css/Box.css';
 
-const Box = (props) => {
-	const imageUrl = process.env.REACT_APP_IMAGE_API_URL + '/w200' + props.poster_path;
+import { redirectToYouTube } from '../service';
 
+const Box = (props) => {
+	//const ytL = getYoutubeId(props.original_title)
+	//	.then(res => res.json())
+	//	.then(data => console.log(data.items[0].snippet.title))
+	const imageUrl = process.env.REACT_APP_IMAGE_API_URL + '/w200' + props.poster_path;
+	//const href = 'https://www.youtube.com/watch?v=' + ytL;
 	return(
-		<div className='box' style={{ backgroundImage: 'url(' + imageUrl + ')' }}>
+		<div onClick={() => redirectToYouTube(props.original_title)} className='box' style={{ backgroundImage: 'url(' + imageUrl + ')' }} target={'_blank'}>
 
 			<div className='box-title'>{props.original_title}</div>
 

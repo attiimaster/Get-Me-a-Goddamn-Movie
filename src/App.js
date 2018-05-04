@@ -38,7 +38,7 @@ class App extends Component {
     const Placeholder = () => {
       return(
         <div className='placeholder'>
-          <h2>Find A Movie!</h2>
+          <h1>Get Me a Goddamn Movie!</h1>
         </div>
       )
     }

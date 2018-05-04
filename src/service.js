@@ -47,3 +47,25 @@ export function method(options) {
   	if(options[1].selected) return '/search/movie';
   	else console.error('service.method:', 'Error: Returned default.');
 }
+
+export function getYoutubeId(movieTitle) {
+	return fetch('https://www.googleapis.com/youtube/v3/search' +
+        	'?part=snippet' +
+        	'&q=' + movieTitle + '+trailer+german' +
+        	'&type=video' +
+        	'&key=' + process.env.REACT_APP_YT_API_KEY)
+}
+
+export function redirectToYouTube(movieTitle) {
+	getYoutubeId(movieTitle)
+		.then(res => res.json())
+		.then(data => {
+			console.log(data.items[0].id.videoId);
+			window.open(
+				'https://www.youtube.com/watch?v=' + data.items[0].id.videoId,
+				'_blank'
+			);
+		})
+}
+
+
