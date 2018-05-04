@@ -4,8 +4,8 @@ import './css/Nav.css';
 const Nav = (props) => {
   return(
     <div className='nav'>
-      <div className='logo'>Logo</div>
-  
+      <h2>Get Me a Goddamn Movie!</h2>
+
       <form onSubmit={props.handleSubmit}>
   
         <select name='searchBy'>

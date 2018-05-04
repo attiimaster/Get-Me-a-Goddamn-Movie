@@ -32,4 +32,12 @@ h1 {
   font-size: 50px;
   margin: 20vh 30%;
 }
+h2 {
+  border-bottom: 2px solid tomato;
+  font-family: 'pangolin';
+  font-size: 30px;
+  margin: 14px;
+  position: absolute;
+  left: 0;
+}
 
