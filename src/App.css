@@ -1,11 +1,12 @@
 .App {
   background: #222;
   color: white;
+  height: 100vh;
   text-align: center;
 }
 
 .placeholder {
-  height: 100vh;
+  eight: 100vh;
 }
 
 form {
