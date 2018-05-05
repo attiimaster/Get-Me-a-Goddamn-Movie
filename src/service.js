@@ -1,8 +1,10 @@
+import config from './config';
+
 export function searchMovies(formdata) {
     const queryStr = '&query=' + formdata[1].value;  //substitute space with +?
-    const url = process.env.REACT_APP_API_URL + 
+    const url = config.API_URL + 
                 method(formdata[0]) +           
-                process.env.REACT_APP_API_KEY + 
+                config.API_KEY + 
                 queryStr;   
     
     console.log(url);         
@@ -23,9 +25,9 @@ export function discoverMovies(actorId, formdata) {
 
 	const queryStr = actors + genre + year + sortBy(formdata[4]);
 
-	const url = process.env.REACT_APP_API_URL + 
+	const url = config.API_URL + 
 	    		method(formdata[0]) +           
-	    		process.env.REACT_APP_API_KEY + 
+	    		config.API_KEY + 
 	    		queryStr; 
 	
 	console.log(url);
@@ -40,18 +42,18 @@ export function method(options) {
 }
 
 export function getActorId(actor) {
-	const url = process.env.REACT_APP_API_URL + 
+	const url = config.API_URL + 
     			'/search/person' +           
-    			process.env.REACT_APP_API_KEY + 
+    			config.API_KEY + 
     			'&query=' + actor; 
 
 	return fetch(url);
 }
 
 export function getGenreId(genre) {
-	const url = process.env.REACT_APP_API_URL + 
+	const url = config.API_URL + 
     			'/genre/movie/list' +           
-    			process.env.REACT_APP_API_KEY + 
+    			config.API_KEY + 
     			'&query=' + genre;
 
     return fetch(url);
@@ -62,7 +64,7 @@ export function getYoutubeId(movieTitle) {
 				'?part=snippet' +
 				'&q=' + movieTitle + '+trailer+german' +
 				'&type=video' +
-				'&key=' + process.env.REACT_APP_YT_API_KEY;
+				'&key=' + config.YT_API_KEY;
 	
 	return fetch(url);
 }
