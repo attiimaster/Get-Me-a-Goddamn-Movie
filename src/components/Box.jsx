@@ -12,12 +12,11 @@ const Box = (props) => {
 	return(
 		<div onClick={() => redirectToYouTube(props.original_title)} className='box' style={{ backgroundImage: 'url(' + imageUrl + ')' }} target={'_blank'}>
 
-			<div className='box-title'>{props.original_title}</div>
-
 			<div className='box-rating'>{props.vote_average}</div>
 
-			<div className='box-date'>
-				{ props.release_date ? props.release_date.slice(0, 4) : null }
+			<div className='box-on-hover'>
+				<div className='box-title'>{props.original_title}</div>
+				<div className='box-date'>{ props.release_date ? props.release_date.slice(0, 4) : null }</div>
 			</div>
 
 		</div>

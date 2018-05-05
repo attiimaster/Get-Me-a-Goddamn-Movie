@@ -6,16 +6,7 @@ export function searchMovies(formdata) {
                 queryStr;   
     
     console.log(url);         
-    return fetch(url)
-}
-
-export function getActorId(actor) {
-	const url = process.env.REACT_APP_API_URL + 
-    			'/search/person' +           
-    			process.env.REACT_APP_API_KEY + 
-    			'&query=' + actor; 
-
-	return fetch(url)
+    return fetch(url);
 }
 
 export function discoverMovies(actorId, formdata) {
@@ -38,7 +29,7 @@ export function discoverMovies(actorId, formdata) {
 	    		queryStr; 
 	
 	console.log(url);
-	return fetch(url)
+	return fetch(url);
 }
 
 export function method(options) {
@@ -48,12 +39,32 @@ export function method(options) {
   	else console.error('service.method:', 'Error: Returned default.');
 }
 
+export function getActorId(actor) {
+	const url = process.env.REACT_APP_API_URL + 
+    			'/search/person' +           
+    			process.env.REACT_APP_API_KEY + 
+    			'&query=' + actor; 
+
+	return fetch(url);
+}
+
+export function getGenreId(genre) {
+	const url = process.env.REACT_APP_API_URL + 
+    			'/genre/movie/list' +           
+    			process.env.REACT_APP_API_KEY + 
+    			'&query=' + genre;
+
+    return fetch(url);
+}
+
 export function getYoutubeId(movieTitle) {
-	return fetch('https://www.googleapis.com/youtube/v3/search' +
-        	'?part=snippet' +
-        	'&q=' + movieTitle + '+trailer+german' +
-        	'&type=video' +
-        	'&key=' + process.env.REACT_APP_YT_API_KEY)
+	const url = 'https://www.googleapis.com/youtube/v3/search' +
+				'?part=snippet' +
+				'&q=' + movieTitle + '+trailer+german' +
+				'&type=video' +
+				'&key=' + process.env.REACT_APP_YT_API_KEY;
+	
+	return fetch(url);
 }
 
 export function redirectToYouTube(movieTitle) {

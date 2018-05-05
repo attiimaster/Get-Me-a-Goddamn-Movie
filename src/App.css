@@ -1,12 +1,8 @@
 .App {
   background: #222;
   color: white;
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
-}
-
-.placeholder {
-  eight: 100vh;
 }
 
 form {
@@ -17,21 +13,25 @@ form {
 }
 form input, form button {
   border: none;
-  font-size: 14px;
+  font-size: 20px;
   padding: 4px 8px;
 }
 form input {
-
+  border-left: 0.5px solid black;
+  border-right: 0.5px solid black;
 }
 form button {
 
+}
+select {
+  font-size: 20px;
 }
 
 h1 {
   border-bottom: 2px solid tomato;
   font-family: 'pangolin';
   font-size: 50px;
-  margin: 20vh 30%;
+  margin: 20vh 10%;
 }
 h2 {
   border-bottom: 2px solid tomato;

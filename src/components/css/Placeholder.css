@@ -1,0 +1,17 @@
+.placeholder {
+  margin: 0 auto;
+  width: 60%;
+}
+.genre-guide-box {
+	border: 1px solid silver;
+	display: inline-flex;
+	margin: 20px;
+}
+.genre-guide-box div {
+	display: inline-flex;
+	padding: 4px;
+}
+.genre-guide-name {
+}
+.genre-guide-id {
+}

@@ -16,7 +16,7 @@ const Nav = (props) => {
   
         <input type='text' name='genre' placeholder='genre' />
         <input type='number' name='year' placeholder='year' />
-  
+        
         <select name='sortBy'>
           <option value='rating'>rating</option>
           <option value='popularity'>popularity</option>

@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 //import { BrowserRouter as Router } from 'react-router-dom';
-import { getActorId, discoverMovies, searchMovies } from './service';
+import { getActorId, discoverMovies, searchMovies, getGenreId } from './service';
 import './App.css';
 
 import Row from './components/Row';
 import Nav from './components/Nav';
+import Placeholder from './components/Placeholder';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    getGenreId('action')
+      .then(res => res.json())
+      .then(data => this.setState({ genres: data.genres }))
   }
 
   handleSubmit(e) {
@@ -20,35 +27,42 @@ class App extends Component {
     if(e.target[0][0].selected) {
       getActorId(formdata[1].value)
         .then(res => res.json())
-        .then(data => 
-  
+        .then(data => {
+          if(data.errors) console.error(data.errors);
+          console.log(data.results[0].name);
+          
           discoverMovies(data.results[0].id, formdata)  //selects first result 
             .then(res => res.json())
-            .then(data => this.setState({ results: data.results }))
-        )     
+            .then(data => {
+              if(data.errors) console.error(data.errors);
+              console.log(data.results);
+              
+              this.setState({ results: data.results })
+          })
+        })     
     } else {
       searchMovies(formdata)
         .then(res => res.json())
-        .then(data => this.setState({ results: data.results }))
+        .then(data => {
+          if(data.errors) console.error(data.errors);
+          console.log(data.results);
+          
+          this.setState({ results: data.results })
+      })
     }
   }
 
   render() {
     const { results } = this.state;
-    const Placeholder = () => {
-      return(
-        <div className='placeholder'>
-          <h1>Get Me a Goddamn Movie!</h1>
-        </div>
-      )
-    }
               
     return (
       <div className='App'>
 
         <Nav handleSubmit={ this.handleSubmit } />
         
-        { results ? <Row results={ results } /> : <Placeholder /> }
+        { results ? <Row results={ results } />
+         :
+        <Placeholder genres={this.state.genres} /> }
 
       </div>
     );
