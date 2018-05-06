@@ -10,6 +10,7 @@ class Row extends Component {
 
 	render() {
 		const { results } = this.props;
+		console.log('row:', this.props)
 
 		if(results) {
 			return(

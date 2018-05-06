@@ -4,7 +4,6 @@ import './css/Nav.css';
 const Nav = (props) => {
   return(
     <div className='nav'>
-      <h2>Get Me a Goddamn Movie!</h2>
 
       <form onSubmit={props.handleSubmit}>
   

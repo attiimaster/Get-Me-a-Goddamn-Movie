@@ -11,27 +11,29 @@ export function searchMovies(formdata) {
     return fetch(url);
 }
 
-export function discoverMovies(actorId, formdata) {
-	const actors = formdata[1].value ? '&with_people=' + actorId : '';
-	const genre = formdata[2].value ? '&with_genres=' + formdata[2].value : '';
-	const year = formdata[3].value ? '&primary_release_year=' + formdata[3].value : '';
+export async function discoverMovies(formdata) {
+	const actorRes = await getActorId(formdata[1].value);
+	const actorData = await actorRes.json();
+	console.log('actor:', actorData.results[0].name);
+	const url = assembleURL(formdata, actorData.results[0].id);
 	
-	const sortBy = (options) => {
-		if(options[0].selected) return '&sort_by=vote_average';
-		if(options[1].selected) return '&sort_by=popularity';
-		if(options[2].selected) return '&sort_by=revenue';
-		else console.error('err:', 'returning default.');
-	}
+	let allPages = { results: [] };
 
-	const queryStr = actors + genre + year + sortBy(formdata[4]);
-
-	const url = config.API_URL + 
-	    		method(formdata[0]) +           
-	    		config.API_KEY + 
-	    		queryStr; 
-	
-	console.log(url);
-	return fetch(url);
+	return new Promise((resolve, reject) => {
+		fetch(url)
+			.then(res => res.json())
+			.then(data => {
+				allPages.total_pages = data.total_pages;
+				data.results.map(item => allPages.results.push(item));
+				
+				for(let i=2; i<=data.total_pages; i++) {
+					fetch(url + '&page=' + i)
+						.then(res => res.json())
+						.then(data => data.results.map(item => allPages.results.push(item)))
+				}
+				resolve(allPages);
+		})
+	});
 }
 
 export function method(options) {
@@ -48,15 +50,6 @@ export function getActorId(actor) {
     			'&query=' + actor; 
 
 	return fetch(url);
-}
-
-export function getGenreId(genre) {
-	const url = config.API_URL + 
-    			'/genre/movie/list' +           
-    			config.API_KEY + 
-    			'&query=' + genre;
-
-    return fetch(url);
 }
 
 export function getYoutubeId(movieTitle) {
@@ -81,4 +74,53 @@ export function redirectToYouTube(movieTitle) {
 		})
 }
 
+export function getGenreId(genre) {
+	const url = config.API_URL + 
+    			'/genre/movie/list' +           
+    			config.API_KEY + 
+    			'&query=' + genre;
+
+    return fetch(url);
+}
+
+export async function fetchAdditionalPages(formdata, page, pageTotal) {
+	const actorRes = await getActorId(formdata[1].value);
+	const actorData = await actorRes.json();
+	console.log(actorData.results[0].name);
+	const url = assembleURL(formdata, actorData.results[0].id);
+
+	let results = [];
+
+	for(let i=2; i<pageTotal; i++) {
+		console.log('forloop'+i)
+		const res = await fetch(url + '&page=' + i);
+		const data = await res.json();
+		console.log(data);
+	}
+	console.log(results);
+	return Promise.all(results);
+}
+
+export function assembleURL(formdata, actorId) {
+	const actors = formdata[1].value ? '&with_people=' + actorId : '';
+	const genre = formdata[2].value ? '&with_genres=' + formdata[2].value : '';
+	const year = formdata[3].value ? '&primary_release_year=' + formdata[3].value : '';
+	
+	const sortBy = (options) => {
+		if(options[0].selected) return '&sort_by=vote_average';
+		if(options[1].selected) return '&sort_by=popularity';
+		if(options[2].selected) return '&sort_by=revenue';
+		else console.error('err:', 'returning default.');
+	}
+
+	const queryStr = actors + genre + year + sortBy(formdata[4]);
+
+	const url = config.API_URL + 
+	    		method(formdata[0]) +           
+	    		config.API_KEY + 
+	    		queryStr; 
+
+	console.log(url);
+	return url;	
+}
 

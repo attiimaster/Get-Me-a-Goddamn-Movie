@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 //import { BrowserRouter as Router } from 'react-router-dom';
-import { getActorId, discoverMovies, searchMovies, getGenreId } from './service';
+import { getActorId, discoverMovies, searchMovies, getGenreId, fetchAdditionalPages, assembleURL } from './service';
 import './App.css';
 
+import Box from './components/Box';
 import Row from './components/Row';
 import Nav from './components/Nav';
 import Placeholder from './components/Placeholder';
@@ -12,6 +13,7 @@ class App extends Component {
     super(props);
     this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTest = this.handleTest.bind(this);
   }
 
   componentDidMount() {
@@ -20,49 +22,48 @@ class App extends Component {
       .then(data => this.setState({ genres: data.genres }))
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     const formdata = e.target;
 
-    if(e.target[0][0].selected) {
-      getActorId(formdata[1].value)
-        .then(res => res.json())
-        .then(data => {
-          if(data.errors) console.error(data.errors);
-          console.log(data.results[0].name);
-          
-          discoverMovies(data.results[0].id, formdata)  //selects first result 
-            .then(res => res.json())
-            .then(data => {
-              if(data.errors) console.error(data.errors);
-              console.log(data.results);
-              
-              this.setState({ results: data.results })
-          })
-        })     
+    if(formdata[0][0].selected) {
+      const data = await discoverMovies(formdata); 
+      console.log('discoverMovies():', data);
+      
+      this.setState({ results: data.results });
+
     } else {
       searchMovies(formdata)
         .then(res => res.json())
         .then(data => {
           if(data.errors) console.error(data.errors);
-          console.log(data.results);
+          console.log('searchMovies():', data);
           
           this.setState({ results: data.results })
       })
     }
   }
 
+  async handleTest(e) {
+    console.log('test:', this.state);
+    console.log('test:', this.state.results.length);
+
+  }
+
   render() {
     const { results } = this.state;
+    if(results) console.log(results[30])
               
     return (
       <div className='App'>
+
+      <input type="button" onClick={ this.handleTest } />
 
         <Nav handleSubmit={ this.handleSubmit } />
         
         { results ? <Row results={ results } />
          :
-        <Placeholder genres={this.state.genres} /> }
+        <Placeholder genres={ this.state.genres } /> }
 
       </div>
     );
