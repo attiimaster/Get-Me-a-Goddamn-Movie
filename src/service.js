@@ -16,24 +16,32 @@ export async function discoverMovies(formdata) {
 	const actorData = await actorRes.json();
 	console.log('actor:', actorData.results[0].name);
 	const url = assembleURL(formdata, actorData.results[0].id);
-	
-	let allPages = { results: [] };
+
 
 	return new Promise((resolve, reject) => {
+		let allPages = { results: [] };
 		fetch(url)
 			.then(res => res.json())
+			.catch(err => console.error(err))
 			.then(data => {
 				allPages.total_pages = data.total_pages;
-				data.results.map(item => allPages.results.push(item));
+				allPages.results = data.results;
+				//data.results.map(item => allPages.results.push(item));
 				
 				for(let i=2; i<=data.total_pages; i++) {
 					fetch(url + '&page=' + i)
 						.then(res => res.json())
-						.then(data => data.results.map(item => allPages.results.push(item)))
+						.then(data => {
+							data.results.map(item => allPages.results.push(item))
+							console.log('b', data.page, data.total_pages)
+							if(data.page === data.total_pages) {
+								console.log('a', data.page, data.total_pages)
+								return resolve(allPages);
+							}
+						})
 				}
-				resolve(allPages);
 		})
-	});
+	})
 }
 
 export function method(options) {
@@ -102,7 +110,7 @@ export async function fetchAdditionalPages(formdata, page, pageTotal) {
 }
 
 export function assembleURL(formdata, actorId) {
-	const actors = formdata[1].value ? '&with_people=' + actorId : '';
+	const actors = formdata[1].value ? '&with_cast=' + actorId : '';
 	const genre = formdata[2].value ? '&with_genres=' + formdata[2].value : '';
 	const year = formdata[3].value ? '&primary_release_year=' + formdata[3].value : '';
 	

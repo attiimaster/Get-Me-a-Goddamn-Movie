@@ -47,12 +47,12 @@ class App extends Component {
   async handleTest(e) {
     console.log('test:', this.state);
     console.log('test:', this.state.results.length);
+    console.log('test: .slice()', this.state.results.slice());
 
   }
 
   render() {
     const { results } = this.state;
-    if(results) console.log(results[30])
               
     return (
       <div className='App'>
