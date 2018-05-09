@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 //import { BrowserRouter as Router } from 'react-router-dom';
-import { getActorId, discoverMovies, searchMovies, getGenreId, fetchAdditionalPages, assembleURL } from './service';
+import { discoverMovies, searchMovies, getGenreId } from './service';
+import config from './config';
 import './App.css';
 
-import Box from './components/Box';
 import Row from './components/Row';
 import Nav from './components/Nav';
 import Placeholder from './components/Placeholder';
@@ -17,23 +17,35 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getGenreId('action')
+    getGenreId('genre')
       .then(res => res.json())
       .then(data => this.setState({ genres: data.genres }))
+
+    //fetch mainpage data
+    fetch(config.API_URL + '/movie/popular' + config.API_KEY)
+      .then(res => res.json())
+      .then(data => this.setState({ popular: data.results }))
+
+    fetch(config.API_URL + '/movie/now_playing' + config.API_KEY)
+      .then(res => res.json())
+      .then(data => this.setState({ playing: data.results }))
+
+    fetch(config.API_URL + '/movie/upcoming' + config.API_KEY)
+      .then(res => res.json())
+      .then(data => this.setState({ upcoming: data.results }))
   }
 
   async handleSubmit(e) {
     e.preventDefault();
-    const formdata = e.target;
 
-    if(formdata[0][0].selected) {
-      const data = await discoverMovies(formdata); 
+    if(e.target[0][0].selected) {
+      const data = await discoverMovies(e.target); 
       console.log('discoverMovies():', data);
       
       this.setState({ results: data.results });
 
     } else {
-      searchMovies(formdata)
+      searchMovies(e.target)
         .then(res => res.json())
         .then(data => {
           if(data.errors) console.error(data.errors);
@@ -45,25 +57,35 @@ class App extends Component {
   }
 
   async handleTest(e) {
-    console.log('test:', this.state);
-    console.log('test:', this.state.results.length);
+    console.log('test: state', this.state);
+    console.log('test: results.length', this.state.results.length);
     console.log('test: .slice()', this.state.results.slice());
 
   }
 
   render() {
-    const { results } = this.state;
+    const { results, popular, playing, upcoming } = this.state;
               
     return (
       <div className='App'>
 
-      <input type="button" onClick={ this.handleTest } />
-
         <Nav handleSubmit={ this.handleSubmit } />
+
+        { /* <button onClick={ this.handleTest }>test</button> */ }
         
-        { results ? <Row results={ results } />
-         :
-        <Placeholder genres={ this.state.genres } /> }
+        <Placeholder genres={ this.state.genres } />
+        
+        { 
+          results ? <Row rowTitle='results' results={ results } />
+            : 
+          <div>
+            { popular ? <Row rowTitle='popular' results={ popular } /> : null }
+    
+            { playing ? <Row rowTitle='playing right now' results={ playing } /> : null }
+    
+            { upcoming ? <Row rowTitle='upcoming' results={ upcoming } /> : null }
+          </div>
+        }
 
       </div>
     );

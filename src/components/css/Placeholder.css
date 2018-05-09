@@ -3,12 +3,11 @@
   width: 60%;
 }
 .genre-guide-box {
-	border: 1px solid silver;
+	border-bottom: 1px solid tomato;
 	display: inline-flex;
-	margin: 20px;
+	margin: 5px;
 }
 .genre-guide-box div {
-	display: inline-flex;
 	padding: 4px;
 }
 .genre-guide-name {

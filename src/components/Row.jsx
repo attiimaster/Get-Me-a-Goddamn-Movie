@@ -9,13 +9,15 @@ class Row extends Component {
 	}
 
 	render() {
-		const { results } = this.props;
+		const { results, rowTitle, getDetails } = this.props;
 
 		if(results) {
 			return(
 				<div className='row'>
-					<h3 className='row-title'>row-title</h3>
-					{ results.map((item, i) => <Box { ...item } key={i} />) }
+					<h3 className='row-title'>{ rowTitle }</h3>
+					<div className='slider'>
+						{ results.map((item, i) => <Box { ...item } getDetails={ getDetails } key={i} />) }
+					</div>
 				</div>
 			)
 		} else { 

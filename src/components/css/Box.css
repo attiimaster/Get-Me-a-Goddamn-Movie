@@ -5,25 +5,17 @@
   background-size: 100%;
   display: inline-flex;
   font-weight: 600;
-  height: 220px; 
+  height: 400px; 
   margin: 4px 5px;
   text-align: center;
   transition: box-shadow 0.2s ease;
   transition: background-size 0.5s ease-out;
   position: relative;
-  width: 200px;
+  width: 270px;
 }
 .box:hover {
   box-shadow: 0px 0px 4px 1px black;
   background-size: 105%;
-}
-
-.box-rating {
-  color: rgba(255, 100, 100);
-  text-shadow: 0px 0px 10px black;
-  position: absolute;
-  top: 0;
-  right: 2%;	
 }
 
 .box-on-hover {
@@ -37,6 +29,14 @@
   opacity: 1;
 }
 
+.box-rating {
+  color: orange;
+  font-size: 20px;
+  text-shadow: 0px 0px 10px black;
+  position: absolute;
+  top: 0;
+  right: 2%;	
+}
 .box-title {
   font-size: 20px;
   text-shadow: 0px 0px 10px black;
@@ -44,4 +44,17 @@
 .box-date {
   text-shadow: 0px 0px 10px black;
   font-weight: 400;
+}
+.watch-trailer {
+  color: orange;
+  cursor: pointer;
+  font-size: 30px;
+  padding: 1px 3px 1px 5px;
+  position: absolute;
+  bottom: 1%;
+  right: 2%;
+  transition: all 0.2s ease;
+}
+.watch-trailer:hover {
+  color: tomato;
 }

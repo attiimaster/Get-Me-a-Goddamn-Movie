@@ -11,7 +11,7 @@ const Nav = (props) => {
           <option value='person'>person</option>
           <option value='movie'>movie</option>
         </select> 
-        <input type='text' name='text' placeholder='actor' />
+        <input type='text' name='text' placeholder='query' required />
   
         <input type='text' name='genre' placeholder='genre' />
         <input type='number' name='year' placeholder='year' />

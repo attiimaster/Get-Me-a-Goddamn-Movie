@@ -5,7 +5,6 @@ const Placeholder = (props) => {
   console.log(props)
   return(
     <div className='placeholder'>
-      <h1>Get Me a Goddamn Movie!</h1>
 
       { props.genres ? props.genres.map((genre, i) =>
       <div className='genre-guide-box' key={i}> 
@@ -13,8 +12,10 @@ const Placeholder = (props) => {
         <div className='genre-guide-id'>{ genre.id }</div>
       </div>
       ) : null }
-      
-      <div>…genres:</div>
+    
+      <h1>Get Me a Goddamn Movie!</h1>
+  
+      <div hidden>…genres:
       Action ​28
       Adventure ​12
       Animation ​16
@@ -33,7 +34,7 @@ const Placeholder = (props) => {
       10770 TV Movie
       53 Thriller
       10752 War
-      37 Western
+      37 Western</div>
     </div>
   )
 }

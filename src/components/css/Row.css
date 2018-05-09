@@ -1,10 +1,17 @@
 .row {
-  background: #222;
-  border: 1px solid black;
-  padding: 2vh 0;
-  eight: 240px;
+  background: linear-gradient(to top right, #111, #222);
+  box-shadow: 0px 0px 5px 1px #111;
+  overflow-x: hidden;
+  padding: 1vh 0;
 }
 .row-title {
-	margin: 2vh 5vw;
+	font-family: raleway;
+	letter-spacing: 2px;
+	margin: 1vh 5vw;
 	text-align: left;
+	text-transform: uppercase;
+}
+.slider { 	/* netflix-esque sliders with scroll bars though */
+  isplay: inline-flex;
+  padding: 0 7%;
 }
