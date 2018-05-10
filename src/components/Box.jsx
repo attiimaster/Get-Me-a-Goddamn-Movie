@@ -6,14 +6,9 @@ import { IMAGE_API_URL } from '../config';
 
 const Box = (props) => {
 	const imageUrl = IMAGE_API_URL + '/w500' + props.poster_path;
-	//console.log(imageUrl);
 
 	return(
-		<div className='box' 
-			 style={{ backgroundImage: 'url(' + imageUrl + ')' }} 
-			 onClick={ () => lol(props) } 
-			 target={'_blank'}>
-
+		<div onClick={ () => props.getDetails(props.id) } className='box' style={{ backgroundImage: 'url(' + imageUrl + ')' }}>
 			<div className='box-on-hover'>
 				<div className='box-rating'>{props.vote_average}</div>
 				<div className='box-title'>{props.original_title}</div>
@@ -28,8 +23,3 @@ const Box = (props) => {
 }
 
 export default Box;
-
-function lol(props) {
-	console.log(props);
-}
-// vll redirectToYouTube() doch bei box.onClick

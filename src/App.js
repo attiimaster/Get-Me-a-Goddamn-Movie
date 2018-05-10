@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-//import { BrowserRouter as Router } from 'react-router-dom';
-import { discoverMovies, searchMovies, getGenreId } from './service';
+import { discoverMovies, searchMovies, getGenreId, getOverlayInfo } from './service';
 import config from './config';
 import './App.css';
 
 import Row from './components/Row';
+import Overlay from './components/Overlay';
 import Nav from './components/Nav';
 import Placeholder from './components/Placeholder';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { 
+      overlay: {
+        id: false,
+        show: false,
+    }};
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTest = this.handleTest.bind(this);
+    this.handleBoxClick = this.handleBoxClick.bind(this);
   }
 
   componentDidMount() {
@@ -35,14 +39,17 @@ class App extends Component {
       .then(data => this.setState({ upcoming: data.results }))
   }
 
-  async handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
 
     if(e.target[0][0].selected) {
-      const data = await discoverMovies(e.target); 
-      console.log('discoverMovies():', data);
-      
-      this.setState({ results: data.results });
+      discoverMovies(e.target)
+        .then(data => {
+          if(data.errors) console.error(data.errors);
+          console.log('discoverMovies():', data);
+          
+          this.setState({ results: data.results });
+        });
 
     } else {
       searchMovies(e.target)
@@ -56,40 +63,43 @@ class App extends Component {
     }
   }
 
-  async handleTest(e) {
-    console.log('test: state', this.state);
-    console.log('test: results.length', this.state.results.length);
-    console.log('test: .slice()', this.state.results.slice());
-
+  handleBoxClick(id) {
+    if(this.state.overlay.show) {
+      this.setState({ overlay: { show: false, id: false } });
+    } else {
+      getOverlayInfo(id)
+        .then(data => this.setState({ overlay: { data: data, show: true, id: id } }));
+    }
   }
 
   render() {
-    const { results, popular, playing, upcoming } = this.state;
+    const { results, popular, playing, upcoming, overlay } = this.state;
               
     return (
-      <div className='App'>
+        <div className='App'>
 
-        <Nav handleSubmit={ this.handleSubmit } />
+          <Nav handleSubmit={ this.handleSubmit } />
+          
+          { overlay.show ? <Overlay { ...overlay.data } close={ this.handleBoxClick } /> : null }
+          
+          <Placeholder genres={ this.state.genres } />
+          
+          { 
+            results ? <Row rowTitle='results' getDetails={ this.handleBoxClick } results={ results } />
+              : 
+            <div>
+              { popular ? <Row rowTitle='popular' getDetails={ this.handleBoxClick } results={ popular } /> : null }
+      
+              { playing ? <Row rowTitle='playing right now' getDetails={ this.handleBoxClick } results={ playing } /> : null }
+      
+              { upcoming ? <Row rowTitle='upcoming' getDetails={ this.handleBoxClick } results={ upcoming } /> : null }
+            </div>
+          }
 
-        { /* <button onClick={ this.handleTest }>test</button> */ }
-        
-        <Placeholder genres={ this.state.genres } />
-        
-        { 
-          results ? <Row rowTitle='results' results={ results } />
-            : 
-          <div>
-            { popular ? <Row rowTitle='popular' results={ popular } /> : null }
-    
-            { playing ? <Row rowTitle='playing right now' results={ playing } /> : null }
-    
-            { upcoming ? <Row rowTitle='upcoming' results={ upcoming } /> : null }
-          </div>
-        }
-
-      </div>
+        </div>
     );
   }
 }
 
 export default App;
+

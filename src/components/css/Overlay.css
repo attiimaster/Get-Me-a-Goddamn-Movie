@@ -1,0 +1,48 @@
+.overlay {
+	background: linear-gradient(to top left, #000, #111);
+	box-shadow: 0px 0px 6px 1px #111;
+	color: white;
+	position: fixed;
+	top: 20%;
+	bottom: 20%;
+	left: 20%;
+	right: 20%;
+	z-index: 20;
+}
+.overlay-text {
+	padding: 20px 40px;
+}
+.backdrop {
+	background-position: center;
+	background-size: cover;
+	box-shadow: inset 0px 0px 40px 30px #111;
+	height: 24%;
+	margin-top: 10px;
+	padding: 20px 0;
+	text-shadow: 0px 0px 4px black;
+	width: 100%;
+	z-index: -1;
+}
+.overlay-img-container {
+	height: 42%;
+	overflow: auto;
+}
+.overlay-imgs {
+	background-position: center;
+	background-size: cover;
+	display: inline-flex;
+	height: 160px;
+	margin: 0px 2px;
+	width: 240px;
+}
+
+.overlay i {
+	font-size: 30px;
+	position: absolute;
+	top: 2%;
+	right: 1%;
+	transition: all 0.2s ease-out;
+}
+.overlay i:hover {
+	color: red;
+}

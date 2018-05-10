@@ -26,11 +26,11 @@ export async function discoverMovies(formdata) {
 			.then(data => {
 				allPages.total_pages = data.total_pages;
 				allPages.results = data.results;
-				//data.results.map(item => allPages.results.push(item));
 				
 				for(let i=2; i<=data.total_pages; i++) {
 					fetch(url + '&page=' + i)
 						.then(res => res.json())
+						.catch(err => console.error(err))
 						.then(data => {
 							data.results.map(item => allPages.results.push(item))
 							
@@ -43,8 +43,23 @@ export async function discoverMovies(formdata) {
 	})
 }
 
+export async function getOverlayInfo(id) {
+  	const details = await fetch(config.API_URL + '/movie/' + id + config.API_KEY);
+  	const detailsJSON = await details.json();
+  	const images = await fetch(config.API_URL + '/movie/' + id + '/images' + config.API_KEY);
+  	const imagesJSON = await images.json();
+  	//const recommendations = await fetch();		//get Recommendations /movie/{movie_id}/recommendations
+  	//const recommendationsJSON = await fetch();
+	
+  	return new Promise((resolve, reject) => {
+  		if(detailsJSON && imagesJSON) {
+  			resolve({ details: detailsJSON, images: imagesJSON.backdrops })	// , recommendations: recommendationsJSON.results
+  		}
+  	})
+}
+
+//--------------------------------------------------------------------------------------------------------
 export function method(options) {
-	// could be './search' & './find' & './discover' & './movie'
   	if(options[0].selected) return '/discover/movie';
   	if(options[1].selected) return '/search/movie';
   	else console.error('service.method:', 'Error: Returned default.');
@@ -57,28 +72,6 @@ export function getActorId(actor) {
     			'&query=' + actor; 
 
 	return fetch(url);
-}
-
-export function getYoutubeId(movieTitle) {
-	const url = 'https://www.googleapis.com/youtube/v3/search' +
-				'?part=snippet' +
-				'&q=' + movieTitle + '+trailer+german' +
-				'&type=video' +
-				'&key=' + config.YT_API_KEY;
-	
-	return fetch(url);
-}
-
-export function redirectToYouTube(movieTitle) {
-	getYoutubeId(movieTitle)
-		.then(res => res.json())
-		.then(data => {
-			console.log('YT id:', data.items[0].id.videoId);
-			window.open(
-				'https://www.youtube.com/watch?v=' + data.items[0].id.videoId,
-				'_blank'
-			);
-		})
 }
 
 export function getGenreId(genre) {
@@ -111,4 +104,29 @@ export function assembleURL(formdata, actorId) {
 	console.log(url);
 	return url;	
 }
+
+//--------------------------------------------------------------------------------------------------------
+export function getYoutubeId(movieTitle) {
+	const url = 'https://www.googleapis.com/youtube/v3/search' +
+				'?part=snippet' +
+				'&q=' + movieTitle + '+trailer+german' +
+				'&type=video' +
+				'&key=' + config.YT_API_KEY;
+	
+	return fetch(url);
+}
+
+export function redirectToYouTube(movieTitle) {
+	getYoutubeId(movieTitle)
+		.then(res => res.json())
+		.then(data => {
+			console.log('YT id:', data.items[0].id.videoId);
+			window.open(
+				'https://www.youtube.com/watch?v=' + data.items[0].id.videoId,
+				'_blank'
+			);
+		})
+}
+
+//--------------------------------------------------------------------------------------------------------
 

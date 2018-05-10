@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/Nav.css';
 
 const Nav = (props) => {
+  
   return(
     <div className='nav'>
 

@@ -2,7 +2,8 @@ import React from 'react';
 import './css/Placeholder.css';
 
 const Placeholder = (props) => {
-  console.log(props)
+  //console.log(props) <== gets calles multiple times
+  
   return(
     <div className='placeholder'>
 

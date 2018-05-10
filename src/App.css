@@ -33,7 +33,7 @@ h1 {
   font-size: 50px;
   margin: 6vh 10%;
 }
-h2 {
+.logo {
   border-bottom: 2px solid tomato;
   font-family: 'pangolin';
   font-size: 30px;
