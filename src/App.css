@@ -5,40 +5,10 @@
   text-align: center;
 }
 
-form {
-  border: 2px solid #eee;
-  border-radius: 5px;
-  display: inline-flex;
-  margin: 2vh 0;
-}
-form input, form button {
-  border: none;
-  font-size: 20px;
-  padding: 4px 8px;
-}
-form input {
-  border-left: 0.5px solid black;
-  border-right: 0.5px solid black;
-}
-form button {
-
-}
-select {
-  font-size: 20px;
-}
-
 h1 {
   border-bottom: 2px solid tomato;
   font-family: 'pangolin';
   font-size: 50px;
   margin: 6vh 10%;
-}
-.logo {
-  border-bottom: 2px solid tomato;
-  font-family: 'pangolin';
-  font-size: 30px;
-  margin: 14px;
-  position: absolute;
-  left: 0;
 }
 

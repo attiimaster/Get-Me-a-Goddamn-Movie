@@ -6,6 +6,8 @@ const Nav = (props) => {
   return(
     <div className='nav'>
 
+      <div className='logo'>Get Me a Goddamn Movie!</div>
+
       <form onSubmit={props.handleSubmit}>
   
         <select name='searchBy'>

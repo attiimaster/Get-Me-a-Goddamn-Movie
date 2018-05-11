@@ -10,11 +10,19 @@ const Overlay = (props) => {
 	
 	return(
 		<div className='overlay'>
+			
 			<div className='backdrop' style={{ backgroundImage: 'url(' + url + details.backdrop_path + ')' }}>
 				<h2>{ details.original_title }</h2>
-				<h3>{ details.tagline }</h3><div>{ details.runtime + 'min' } { details.release_date }</div>
+				<h3>{ details.tagline }</h3>
 			</div>			
-			<div className='overlay-text'>{ details.overview }</div>
+			
+			<div className='overlay-text'>
+				<div>
+					{ details.runtime + 'min' } 
+					{ details.release_date.slice(0, 4) }
+				</div>
+				{ details.overview }
+			</div>
 
 			<div className='overlay-img-container'>{ images.map(item => <div className='overlay-imgs' style={{ backgroundImage: 'url(' + url + item.file_path + ')' }}></div>)}</div>
 

@@ -14,7 +14,7 @@ const Placeholder = (props) => {
       </div>
       ) : null }
     
-      <h1>Get Me a Goddamn Movie!</h1>
+      <h1 hidden>Get Me a Goddamn Movie!</h1>
   
       <div hidden>…genres:
       Action ​28
