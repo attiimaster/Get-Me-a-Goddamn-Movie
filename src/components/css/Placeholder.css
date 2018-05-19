@@ -15,3 +15,9 @@
 }
 .genre-guide-id {
 }
+
+@media (max-width: 500px) {
+	.placeholder {
+		display: none;
+	}
+}

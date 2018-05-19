@@ -96,6 +96,14 @@ class App extends Component {
             </div>
           }
 
+          <div className='footer'>
+            A small app to cut down the time to find movies worth watching. 
+            It relies on the <strong>TMDB API</strong> for data and uses <strong>YouTube</strong> to get the trailer (not 100% foolproof yet). 
+            <a href='https://github.com/attiimaster/Get-Me-a-Goddamn-Movie' target='_blank'>
+              <i className='fab fa-github'></i>
+            </a>
+          </div>
+
         </div>
     );
   }

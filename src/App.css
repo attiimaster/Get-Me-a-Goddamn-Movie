@@ -12,3 +12,25 @@ h1 {
   margin: 6vh 10%;
 }
 
+input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+}
+
+.footer {
+  color: #999;
+  padding: 20px 0;
+}
+
+.footer a {
+  margin-left: 5px;
+}
+
+.fa-github {
+  font-size: 20px;
+}
+.fa-github:hover {
+  color: purple;
+  text-shadow: 0px 0px 4px white;
+}
+

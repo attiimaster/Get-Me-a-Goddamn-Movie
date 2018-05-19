@@ -11,17 +11,17 @@ const Nav = (props) => {
       <form onSubmit={props.handleSubmit}>
   
         <select name='searchBy'>
-          <option value='person'>person</option>
+          <option value='person'>actor</option>
           <option value='movie'>movie</option>
         </select> 
-        <input type='text' name='text' placeholder='query' required />
-  
-        <input type='text' name='genre' placeholder='genre' />
-        <input type='number' name='year' placeholder='year' />
+        
+        <input className='form-query' type='text' name='text' placeholder=' query' required />
+        <input className='form-genre' type='text' name='genre' placeholder=' genre' />
+        <input className='form-year' type='number' name='year' placeholder=' year' />
         
         <select name='sortBy'>
-          <option value='rating'>rating</option>
           <option value='popularity'>popularity</option>
+          <option value='rating'>rating</option>
           <option value='revenue'>revenue</option>
         </select>
   

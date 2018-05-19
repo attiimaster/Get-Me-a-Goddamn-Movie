@@ -88,8 +88,8 @@ export function assembleURL(formdata, actorId) {
 	const year = formdata[3].value ? '&primary_release_year=' + formdata[3].value : '';
 	
 	const sortBy = (options) => {
-		if(options[0].selected) return '&sort_by=vote_average.desc';
-		if(options[1].selected) return '&sort_by=popularity.desc';
+		if(options[0].selected) return '&sort_by=popularity.desc';
+		if(options[1].selected) return '&sort_by=vote_average.desc';
 		if(options[2].selected) return '&sort_by=revenue.desc';
 		else console.error('err:', 'returning default.');
 	}
@@ -105,7 +105,7 @@ export function assembleURL(formdata, actorId) {
 	return url;	
 }
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------YOUTUBE-------------------------------------------------------------------
 export function getYoutubeId(movieTitle) {
 	const url = 'https://www.googleapis.com/youtube/v3/search' +
 				'?part=snippet' +

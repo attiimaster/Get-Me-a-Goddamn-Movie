@@ -13,7 +13,7 @@
 }
 
 form {
-  border: 2px solid #eee;
+  border: 1px solid #eee;
   border-radius: 5px;
   display: inline-flex;
   margin: 2vh 0;
@@ -28,7 +28,21 @@ form input {
   border-right: 0.5px solid black;
 }
 form button {
+  background: #eee;
+  transition: all 0.1s ease;
+}
+form button:hover {
+  background: silver;
+}
 
+.form-query {
+  width: 260px;
+}
+.form-genre {
+  width: 80px;
+}
+.form-year {
+  width: 80px;
 }
 
 @media(max-width: 1000px) {
@@ -43,13 +57,23 @@ form button {
     border: none;
     border-bottom: 1px solid #eee;
     font-size: 20px;
-    margin: 0px 0;
+    margin: 0px;
     padding: 0;
+    max-width: 500px;
+    width: 98%;
+  }
+  .form-query {
+    width: 98%;
+  }
+  .form-genre {
+    width: 98%;
+  }
+  .form-year {
     width: 98%;
   }
   .logo {
-      margin: 0;
-      margin-bottom: 2px;
+    margin: 0;
+    margin-bottom: 2px;
     position: relative;
   }
 }
