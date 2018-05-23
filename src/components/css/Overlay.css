@@ -10,16 +10,14 @@
 	z-index: 20;
 	verflow: auto;
 }
-.overlay-text {
-	padding: 20px 40px;
-}
 .backdrop {
 	background-position: center;
 	background-size: cover;
-	box-shadow: inset 0px 0px 40px 30px #111;
-	height: 24%;
+	box-shadow: inset 0px 0px 150px 20px #111;
+	height: 50%;
 	margin-top: 0px;
 	padding: 20px 0;
+	text-align: left;
 	text-shadow: 0px 0px 4px black;
 	width: 100%;
 	z-index: -1;
@@ -27,6 +25,25 @@
 .overlay-img-container {
 	height: 43%;
 	overflow: auto;
+}
+.overlay-title {
+	padding: 10px;
+	padding-left: 40px;
+	width: 48%;
+}
+.overlay-tagline {	
+	padding: 0px;
+	padding-left: 40px;
+	width: 48%;
+}
+.overlay-runtime {
+	font-size: 90%;
+}
+.overlay-text {
+	overflow: auto;
+	padding: 0px;
+	padding-left: 40px;
+	width: 48%;
 }
 .overlay-imgs {
 	background-position: center;
@@ -37,14 +54,15 @@
 	width: 240px;
 }
 
-.overlay i {
+
+.fa-times-circle {
 	font-size: 30px;
 	position: absolute;
 	top: 2%;
 	right: 1%;
 	transition: all 0.2s ease-out;
 }
-.overlay i:hover {
+.fa-times-circle:hover {
 	color: red;
 }
 
