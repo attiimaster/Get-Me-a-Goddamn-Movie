@@ -1,0 +1,11 @@
+.stars-container {
+	margin-right: 10px;
+}
+.stars-container .fas {
+	text-shadow: 0px 0px 12px black;
+	color: orange;
+}
+.stars-container .far {
+	text-shadow: 0px 0px 12px black;
+	color: 999;
+}

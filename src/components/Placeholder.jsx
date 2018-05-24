@@ -2,11 +2,9 @@ import React from 'react';
 import './css/Placeholder.css';
 
 const Placeholder = (props) => {
-  //console.log(props) <== gets calles multiple times
   
   return(
     <div className='placeholder'>
-
       { props.genres ? props.genres.map((genre, i) =>
       <div className='genre-guide-box' key={i}> 
         <div className='genre-guide-name'>{ genre.name }</div>

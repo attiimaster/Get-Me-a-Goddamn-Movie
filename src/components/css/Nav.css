@@ -39,6 +39,8 @@ select {
   border: none;
   border-left: 0.5px solid black;
   border-right: 0.5px solid black;
+  color: #666;
+  font-size: 20px;
 }
 
 .form-query {
@@ -53,33 +55,34 @@ select {
 
 @media(max-width: 1000px) {
   
-  form {
-    border: none;
-    display: inline;
-    margin: 2vh 0;
-    padding: 0;
-  }
-  form input, form button, form select {
-    border: none;
-    border-bottom: 1px solid #eee;
-    font-size: 20px;
-    margin: 0px;
-    padding: 0;
-    max-width: 500px;
-    width: 98%;
-  }
-  .form-query {
-    width: 98%;
-  }
-  .form-genre {
-    width: 98%;
-  }
-  .form-year {
-    width: 98%;
-  }
+
   .logo {
     margin: 0;
     margin-bottom: 2px;
     position: relative;
+  }
+}
+
+@media(max-width: 660px) {
+  
+    form {
+    font-size: 10px;
+  }
+  form input, form button {
+    border: none;
+    font-size: 16px;
+    padding: 4px 8px;
+  }
+  select {
+    font-size: 16px;
+  }
+  .form-query {
+    width: 100px;
+  }
+  .form-genre {
+    display: none;
+  }
+  .form-year {
+    display: none;
   }
 }

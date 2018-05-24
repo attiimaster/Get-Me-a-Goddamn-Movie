@@ -2,6 +2,8 @@
 	background: linear-gradient(to top left, #000, #111);
 	box-shadow: 0px 0px 6px 1px #111;
 	color: white;
+	font-family: 'open sans';
+	font-size: 110%;
 	position: fixed;
 	top: 20%;
 	bottom: 20%;
@@ -18,7 +20,7 @@
 	margin-top: 0px;
 	padding: 20px 0;
 	text-align: left;
-	text-shadow: 0px 0px 4px black;
+	text-shadow: 0px 0px 40px black;
 	width: 100%;
 	z-index: -1;
 }
@@ -27,23 +29,27 @@
 	overflow: auto;
 }
 .overlay-title {
-	padding: 10px;
+	margin-bottom: 8px;
+	padding: 0px;
 	padding-left: 40px;
 	width: 48%;
 }
-.overlay-tagline {	
+.overlay-tagline {
+	margin-bottom: 2px;
+	font-style: oblique;	
 	padding: 0px;
 	padding-left: 40px;
 	width: 48%;
 }
 .overlay-runtime {
-	font-size: 90%;
+	display: inline-flex;
+	padding-left: 40px;
 }
 .overlay-text {
 	overflow: auto;
 	padding: 0px;
 	padding-left: 40px;
-	width: 48%;
+	width: 70%;
 }
 .overlay-imgs {
 	background-position: center;
@@ -78,9 +84,10 @@
 		max-height: 30%;
 		overflow: auto;
 		padding: 10px 10px;
+		width: 70%;
 	}
 	.backdrop {
-		height: 20%;
+		height: 50%;
 	}
 	
 	.overlay i {
