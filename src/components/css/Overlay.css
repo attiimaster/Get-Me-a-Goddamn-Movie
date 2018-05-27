@@ -1,15 +1,23 @@
 .overlay {
+	background: rgba(0, 0, 0, 0.7);
+	height: 100vh;
+	margin: -80px 0;
+	padding: 0;
+	position: fixed;
+	width: 100vw;
+	z-index: 20;
+}
+.overlay-inner {
 	background: linear-gradient(to top left, #000, #111);
 	box-shadow: 0px 0px 6px 1px #111;
 	color: white;
 	font-family: 'open sans';
 	font-size: 110%;
-	position: fixed;
+	position: absolute;
 	top: 20%;
 	bottom: 20%;
 	left: 20%;
 	right: 20%;
-	z-index: 20;
 	verflow: auto;
 }
 .backdrop {
@@ -19,18 +27,22 @@
 	height: 50%;
 	margin-top: 0px;
 	padding: 20px 0;
+	position: relative;
 	text-align: left;
 	text-shadow: 0px 0px 40px black;
 	width: 100%;
-	z-index: -1;
 }
-.overlay-img-container {
-	height: 43%;
-	overflow: auto;
+.backdrop-filter {
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.7), 60%, rgba(0, 0, 0, 0));
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 .overlay-title {
 	margin-bottom: 8px;
-	padding: 0px;
+	padding-top: 10px;
 	padding-left: 40px;
 	width: 48%;
 }
@@ -50,6 +62,11 @@
 	padding: 0px;
 	padding-left: 40px;
 	width: 70%;
+}
+.overlay-img-container {
+	height: 42%;
+	padding: 2px;
+	overflow: auto;
 }
 .overlay-imgs {
 	background-position: center;
