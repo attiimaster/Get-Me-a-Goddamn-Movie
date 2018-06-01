@@ -4,6 +4,7 @@ import config from './config';
 import './App.css';
 
 import Row from './components/Row';
+import SliderRow from './components/SliderRow';
 import Overlay from './components/Overlay';
 import Nav from './components/Nav';
 import Placeholder from './components/Placeholder';
@@ -88,11 +89,11 @@ class App extends Component {
             results ? <Row rowTitle='results' getDetails={ this.handleBoxClick } results={ results } />
               : 
             <div>
-              { popular ? <Row rowTitle='popular' getDetails={ this.handleBoxClick } results={ popular } /> : null }
+              { popular ? <SliderRow rowTitle='popular' getDetails={ this.handleBoxClick } results={ popular } /> : null }
       
-              { playing ? <Row rowTitle='playing right now' getDetails={ this.handleBoxClick } results={ playing } /> : null }
+              { playing ? <SliderRow rowTitle='playing right now' getDetails={ this.handleBoxClick } results={ playing } /> : null }
       
-              { upcoming ? <Row rowTitle='upcoming' getDetails={ this.handleBoxClick } results={ upcoming } /> : null }
+              { upcoming ? <SliderRow rowTitle='upcoming' getDetails={ this.handleBoxClick } results={ upcoming } /> : null }
             </div>
           }
 

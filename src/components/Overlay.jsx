@@ -21,7 +21,7 @@ const Overlay = (props) => {
 		
 						<div className='overlay-runtime'> 
 							<Stars votes={ details.vote_average } />
-							{ Math.floor(details.runtime / 60) + ':' }{ details.runtime % 60 + 'h' }
+							{ Math.floor(details.runtime / 60) + ':' }{ details.runtime % 60 < 10 ? '0' + details.runtime % 60 + 'h' : details.runtime % 60 + 'h' }
 						</div>
 		
 						<h3 className='overlay-tagline'>{ details.tagline }</h3>			

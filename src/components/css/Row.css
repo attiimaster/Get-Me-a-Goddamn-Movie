@@ -2,16 +2,27 @@
   background: linear-gradient(to top right, #111, #222);
   box-shadow: 0px 0px 5px 1px #111;
   overflow-x: hidden;
-  padding: 1vh 0;
+  padding-top: 1vh;
+  padding-bottom: 3vh;
+  padding-left: 4vh;
+  padding-right: 4vh;
 }
 .row-title {
-	font-family: raleway;
+  font-family: 'open sans';
 	letter-spacing: 2px;
 	margin: 1vh 5vw;
 	text-align: left;
 	text-transform: uppercase;
 }
-.slider { 	/* netflix-esque sliders with scroll bars though */
-  isplay: inline-flex;
+.slider { 	/*  to display <Boxes/> as a 4x5 grid  */
   padding: 0 7%;
 }
+
+.slick-dots li button:before {
+  text-shadow: 0px 0px 4px white;
+  color: #eee;
+  }
+.slick-dots li.slick-active button:before {
+  text-shadow: 0px 0px 4px white;
+  color: white;
+  }
