@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './css/Overlay.css';
 
 import Stars from './Stars';
@@ -11,7 +11,8 @@ const Overlay = (props) => {
 	console.log('Overlay:', props);
 	
 	return(
-		<div className='overlay'>
+		<div>
+			<div className='overlay' onClick={ () => props.close() }></div>
 			<div className='overlay-inner'>
 				<div className='backdrop' style={{ backgroundImage: 'url(' + url + details.backdrop_path + ')' }}>
 					<div class='backdrop-filter'>

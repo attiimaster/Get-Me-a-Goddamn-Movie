@@ -13,12 +13,12 @@
 	color: white;
 	font-family: 'open sans';
 	font-size: 110%;
-	position: absolute;
+	position: fixed;
 	top: 20%;
 	bottom: 20%;
 	left: 20%;
 	right: 20%;
-	verflow: auto;
+	z-index: 30;
 }
 .backdrop {
 	background-position: center;
@@ -33,7 +33,7 @@
 	width: 100%;
 }
 .backdrop-filter {
-	background: linear-gradient(to right, rgba(0, 0, 0, 0.7), 60%, rgba(0, 0, 0, 0));
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.9), 70%, rgba(0, 0, 0, 0));
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -91,19 +91,14 @@
 
 @media(max-width: 1000px) {
 	.overlay {
-		background: rgba(0, 0, 0, 0.7);
-		margin: 0;
-		padding: 0;
-		position: fixed;
-		top: 0;
-		z-index: 20;
+		display: none;
 	}
 	.overlay-inner {
 		font-size: 100%;
 		top: 0%;
 		bottom: 0%;
 		left: 0%;
-		right: 3%;
+		right: 0%;
 	}
 	.overlay-title {
 		padding: 0 30px;

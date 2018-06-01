@@ -3,13 +3,14 @@
   box-shadow: 0px 0px 5px 1px #111;
   overflow-x: hidden;
   padding-top: 1vh;
-  padding-bottom: 3vh;
-  padding-left: 4vh;
-  padding-right: 4vh;
+  padding-bottom: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .row-title {
+  color: silver;
   font-family: 'open sans';
-	letter-spacing: 2px;
+	letter-spacing: 6px;
 	margin: 1vh 5vw;
 	text-align: left;
 	text-transform: uppercase;
