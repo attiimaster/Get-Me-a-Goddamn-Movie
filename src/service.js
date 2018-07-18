@@ -12,20 +12,28 @@ export function searchMovies(formdata) {
 }
 
 export async function discoverMovies(formdata) {
-	const actorRes = await getActorId(formdata[1].value);
-	const actorData = await actorRes.json();
-	console.log('actor:', actorData.results[0].name);
-	const url = assembleURL(formdata, actorData.results[0].id);
-
+	let url;
+	if (formdata[1].value) {
+		const actorRes = await getActorId(formdata[1].value);
+		const actorData = await actorRes.json();
+		console.log('actor:', actorData.results[0].name);
+		url = assembleURL(formdata, actorData.results[0].id);
+	} else {
+		url = assembleURL(formdata);
+	}
 
 	return new Promise((resolve, reject) => {
 		let allPages = { results: [] };
 		fetch(url)
 			.then(res => res.json())
 			.catch(err => console.error(err))
-			.then(data => {
+			.then(data => {console.log(data)
 				allPages.total_pages = data.total_pages;
 				allPages.results = data.results;
+
+				if(data.total_pages === 1) {
+					return resolve(allPages);
+				}
 				
 				for(let i=2; i<=data.total_pages; i++) {
 					fetch(url + '&page=' + i)
@@ -34,7 +42,7 @@ export async function discoverMovies(formdata) {
 						.then(data => {
 							data.results.map(item => allPages.results.push(item))
 							
-							if(data.page === data.total_pages) {
+							if(data.page === data.total_pages || data.page === 10) {
 								return resolve(allPages);
 							}
 						})

@@ -74,16 +74,16 @@ class App extends Component {
   }
 
   render() {
-    const { results, popular, playing, upcoming, overlay } = this.state;
+    const { results, popular, playing, upcoming, overlay, genres } = this.state;
               
     return (
         <div className='App'>
 
-          <Nav handleSubmit={ this.handleSubmit } />
+          <Nav handleSubmit={ this.handleSubmit } genres={ genres }/>
           
           { overlay.show ? <Overlay { ...overlay.data } close={ this.handleBoxClick } /> : null }
           
-          <Placeholder genres={ this.state.genres } />
+          <Placeholder genres={ genres } />
           
           { 
             results ? <Row rowTitle='results' getDetails={ this.handleBoxClick } results={ results } />

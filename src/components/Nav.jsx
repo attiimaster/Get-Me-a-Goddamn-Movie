@@ -15,7 +15,9 @@ const Nav = (props) => {
           <option value='movie'>movie</option>
         </select> 
         
-        <input className='form-query' type='text' name='text' placeholder=' query' required />
+        <input className='form-query' type='text' name='text' placeholder=' query'/>
+
+
         <input className='form-genre' type='text' name='genre' placeholder=' genre' />
         <input className='form-year' type='number' name='year' placeholder=' year' />
         
