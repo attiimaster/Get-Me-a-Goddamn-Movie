@@ -1,9 +1,9 @@
 import config from './config';
 
-export function searchMovies(formdata) {
-    const queryStr = '&query=' + formdata[1].value;  //substitute space with +?
+export function searchMovies(formdata, page) {
+    const queryStr = '&query=' + formdata[1].value + '&page=' + page;  //substitute space with +?
     const url = config.API_URL + 
-                method(formdata[0]) +           
+                '/search/movie' +           
                 config.API_KEY + 
                 queryStr;   
     
@@ -11,44 +11,18 @@ export function searchMovies(formdata) {
     return fetch(url);
 }
 
-export async function discoverMovies(formdata) {
+export async function discoverMovies(formdata, page) {
 	let url;
 	if (formdata[1].value) {
 		const actorRes = await getActorId(formdata[1].value);
 		const actorData = await actorRes.json();
 		console.log('actor:', actorData.results[0].name);
-		url = assembleURL(formdata, actorData.results[0].id);
+		url = assembleURL(formdata, page, actorData.results[0].id);
 	} else {
-		url = assembleURL(formdata);
+		url = assembleURL(formdata, page);
 	}
 
-	return new Promise((resolve, reject) => {
-		let allPages = { results: [] };
-		fetch(url)
-			.then(res => res.json())
-			.catch(err => console.error(err))
-			.then(data => {console.log(data)
-				allPages.total_pages = data.total_pages;
-				allPages.results = data.results;
-
-				if(data.total_pages === 1) {
-					return resolve(allPages);
-				}
-				
-				for(let i=2; i<=data.total_pages; i++) {
-					fetch(url + '&page=' + i)
-						.then(res => res.json())
-						.catch(err => console.error(err))
-						.then(data => {
-							data.results.map(item => allPages.results.push(item))
-							
-							if(data.page === data.total_pages || data.page === 10) {
-								return resolve(allPages);
-							}
-						})
-				}
-		})
-	})
+	return fetch(url)
 }
 
 export async function getOverlayInfo(id) {
@@ -67,12 +41,6 @@ export async function getOverlayInfo(id) {
 }
 
 //--------------------------------------------------------------------------------------------------------
-export function method(options) {
-  	if(options[0].selected) return '/discover/movie';
-  	if(options[1].selected) return '/search/movie';
-  	else console.error('service.method:', 'Error: Returned default.');
-}
-
 export function getActorId(actor) {
 	const url = config.API_URL + 
     			'/search/person' +           
@@ -90,11 +58,12 @@ export function getGenreId(genre) {
     return fetch(url);
 }
 
-export function assembleURL(formdata, actorId) {
+export function assembleURL(formdata, page, actorId) {
+
 	const actors = formdata[1].value ? '&with_cast=' + actorId : '';
 	const genre = formdata[2].value ? '&with_genres=' + formdata[2].value : '';
 	const year = formdata[3].value ? '&primary_release_year=' + formdata[3].value : '';
-	
+	const pageNumber = '&page=' + page;
 	const sortBy = (options) => {
 		if(options[0].selected) return '&sort_by=popularity.desc';
 		if(options[1].selected) return '&sort_by=vote_average.desc';
@@ -102,10 +71,10 @@ export function assembleURL(formdata, actorId) {
 		else console.error('err:', 'returning default.');
 	}
 
-	const queryStr = actors + genre + year + sortBy(formdata[4]);
+	const queryStr = actors + genre + year + pageNumber + sortBy(formdata[4]);
 
 	const url = config.API_URL + 
-	    		method(formdata[0]) +           
+	    		'/discover/movie' +           
 	    		config.API_KEY + 
 	    		queryStr; 
 

@@ -7,17 +7,17 @@ import Row from './components/Row';
 import SliderRow from './components/SliderRow';
 import Overlay from './components/Overlay';
 import Nav from './components/Nav';
-import Placeholder from './components/Placeholder';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      overlay: {
-        id: false,
-        show: false,
-    }};
+      overlay: { id: false, show: false },
+      formdata: undefined,
+      query: { results: false, total_results: false, page: false, total_pages: false },
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePagination = this.handlePagination.bind(this);
     this.handleBoxClick = this.handleBoxClick.bind(this);
   }
 
@@ -42,26 +42,50 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log("x", e.target)
+    this.setState({ formdata: e.target })
 
-    if(e.target[0][0].selected) {
-      discoverMovies(e.target)
-        .then(data => {
-          if(data.errors) console.error(data.errors);
-          console.log('discoverMovies():', data);
-          
-          this.setState({ results: data.results });
-        });
+    if (e.target[0][0].selected) {
+      discoverMovies(e.target, 1)
+      .then(res => res.json())
+      .then(data => {
+        if(data.errors) console.error(data.errors);
+        console.log('discoverMovies():', data);
+        this.setState({ query: data });
+      })
 
-    } else {
-      searchMovies(e.target)
+    } else if (e.target[0][1].selected) {
+      searchMovies(e.target, 1)
         .then(res => res.json())
         .then(data => {
           if(data.errors) console.error(data.errors);
           console.log('searchMovies():', data);
-          
-          this.setState({ results: data.results })
+        this.setState({ query: data });
       })
-    }
+    } else { alert("Oops, something went wrong!") }
+  }
+
+  handlePagination(e) {
+    const formdata = this.state.formdata;
+
+    if (formdata[0][0].selected) {
+      discoverMovies(formdata, e.target.innerHTML)
+      .then(res => res.json())
+      .then(data => {
+        if(data.errors) console.error(data.errors);
+        console.log('discoverMovies():', data);
+        this.setState({ query: data });
+      })
+
+    } else if (formdata[0][1].selected) {
+      searchMovies(formdata, e.target.innerHTML)
+        .then(res => res.json())
+        .then(data => {
+          if(data.errors) console.error(data.errors);
+          console.log('searchMovies():', data);
+        this.setState({ query: data });
+      })
+    } else { alert("Oops, something went wrong!") }
   }
 
   handleBoxClick(id) {
@@ -74,19 +98,24 @@ class App extends Component {
   }
 
   render() {
-    const { results, popular, playing, upcoming, overlay, genres } = this.state;
+    const { query, popular, playing, upcoming, overlay, genres } = this.state;
               
     return (
         <div className='App'>
 
           <Nav handleSubmit={ this.handleSubmit } genres={ genres }/>
+
+          <div className="guide">
+            <div><em>Quickguide</em></div>
+            <small>To discover movies select actor. You may choose to omit the "name-input".</small>
+            <br />
+            <small>To search for specific movies select movie. The "name-input" is required. Other filter options are disabled. </small>
+          </div>
           
           { overlay.show ? <Overlay { ...overlay.data } close={ this.handleBoxClick } /> : null }
           
-          <Placeholder genres={ genres } />
-          
           { 
-            results ? <Row rowTitle='results' getDetails={ this.handleBoxClick } results={ results } />
+            query && query.results ? <Row rowTitle='results' getDetails={ this.handleBoxClick } handlePagination={ this.handlePagination } query={ query } />
               : 
             <div>
               { popular ? <SliderRow rowTitle='popular' getDetails={ this.handleBoxClick } results={ popular } /> : null }

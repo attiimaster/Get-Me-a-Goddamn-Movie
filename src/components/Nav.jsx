@@ -15,11 +15,14 @@ const Nav = (props) => {
           <option value='movie'>movie</option>
         </select> 
         
-        <input className='form-query' type='text' name='text' placeholder=' query'/>
+        <input className='form-query' type='text' name='text' placeholder='name'/>
+                
+        <select>
+          <option value="">Genre</option>
+          { props.genres ? props.genres.map((g, i) => <option value={ g.id }>{ g.name }</option>) : null }
+        </select>
 
-
-        <input className='form-genre' type='text' name='genre' placeholder=' genre' />
-        <input className='form-year' type='number' name='year' placeholder=' year' />
+        <input className='form-year' type='number' name='year' placeholder='year' />
         
         <select name='sortBy'>
           <option value='popularity'>popularity</option>
