@@ -11,8 +11,8 @@ const Nav = (props) => {
       <form onSubmit={props.handleSubmit}>
   
         <select name='searchBy'>
-          <option value='person'>actor</option>
-          <option value='movie'>movie</option>
+          <option value='person'>Discover</option>
+          <option value='movie'>Search</option>
         </select> 
         
         <input className='form-query' type='text' name='text' placeholder='name'/>

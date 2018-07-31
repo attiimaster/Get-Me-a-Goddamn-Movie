@@ -37,3 +37,7 @@ input[type="number"] {
   padding: 10px;
 }
 
+.noscroll {
+  overflow: hidden;
+}
+

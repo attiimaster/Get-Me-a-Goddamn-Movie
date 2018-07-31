@@ -91,9 +91,13 @@ class App extends Component {
   handleBoxClick(id) {
     if(this.state.overlay.show) {
       this.setState({ overlay: { show: false, id: false } });
+      document.querySelector("body").className = "";
     } else {
       getOverlayInfo(id)
-        .then(data => this.setState({ overlay: { data: data, show: true, id: id } }));
+        .then(data => {
+          this.setState({ overlay: { data: data, show: true, id: id } });
+          document.querySelector("body").className = "noscroll";
+        });
     }
   }
 
@@ -107,9 +111,9 @@ class App extends Component {
 
           <div className="guide">
             <div><em>Quickguide</em></div>
-            <small>To discover movies select actor. You may choose to omit the "name-input".</small>
+            <small>When using the discover feature you may choose to omit the "name-input" or enter an actor.</small>
             <br />
-            <small>To search for specific movies select movie. The "name-input" is required. Other filter options are disabled. </small>
+            <small>When using the search feature the "name-input" is required. You have to provide the movie title. Other filter options are disabled. </small>
           </div>
           
           { overlay.show ? <Overlay { ...overlay.data } close={ this.handleBoxClick } /> : null }
