@@ -18,5 +18,5 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://attiimaster.github.io/Get-Me-a-Goddamn-Movie"
+  "homepage": "https://raphaelmayer.github.io/Get-Me-a-Goddamn-Movie"
 }
